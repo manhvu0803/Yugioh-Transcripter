@@ -1,29 +1,30 @@
- /* Tooltip container */
-.tooltip {
+ .tooltip {
 	position: relative;
 	display: inline-block;
 }
 
-.tooltipimage {
-	scale: 75%;
-	float: left;
-	margin: -10% -5% -10% -7%;
+.tooltiptext {
+	min-width: 500px;
+	white-space: pre-line;
+	margin-left: 10px;
 }
 
-.tooltiptext {
-	margin: 10px;
+.tooltipimage {
+	float: left;
 }
-  
+
 /* Tooltip text */
 .tooltip .tooltipcontainer {
 	visibility: hidden;
-	min-width: 560px;
 	font-size: larger;
+	display: flex;
 	background-color: #555;
 	color: #fff;
 	text-align: left;
-	padding: 5px 5px;
+	padding: 10px 10px;
 	border-radius: 6px;
+
+	white-space: normal;
   
 	/* Position the tooltip text */
 	position: absolute;
