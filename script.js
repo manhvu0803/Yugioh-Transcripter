@@ -47,7 +47,7 @@ function appendCard(obj, cardName, index)
 
 function getImageInfo(objId, cardName)
 {
-	let url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?name=" + cardName;
+	let url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?name=" + encodeURIComponent(cardName);
 	console.log("Accessing " + url);
 	fetch(url)
 		.then((resp) => resp.json())
@@ -57,8 +57,7 @@ function getImageInfo(objId, cardName)
 			let tooltip = document.getElementById(objId).getElementsByTagName(`div`);
 			tooltip[0].getElementsByTagName(`img`)[0].src = `https://storage.googleapis.com/ygoprodeck.com/pics_small/${card.id}.jpg`;
 			tooltip[1].innerHTML = card.desc;
-		})
-	
+		})	
 }
 
 function getCardUrl(doc) {
