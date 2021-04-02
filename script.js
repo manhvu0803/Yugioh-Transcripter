@@ -42,23 +42,23 @@ function appendCard(obj, cardName, index)
 	link.appendChild(tooltip);
 	
 	obj.appendChild(link);
-	getImageUrl(tooltip.id, cardName);
+	getImageInfo(tooltip.id, cardName);
 }
 
-function getImageUrl(objId, cardName)
+function getImageInfo(objId, cardName)
 {
-	let url = "https://yugipedia.com/wiki/" + cardName.replace(/ /g, "_");
+	let url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?name=" + cardName;
 	console.log("Accessing " + url);
-	const http = new XMLHttpRequest();
-	http.open("GET", url);
-	http.send();
-
-	http.onreadystatechange = function() {
-		if (http.readyState == 4 && http.status == 200) {
+	fetch(url)
+		.then((resp) => resp.json())
+		.then((json) => {
+			let card = json.data[0];
+			
 			let tooltip = document.getElementById(objId).getElementsByTagName(`div`);
-			tooltip[0].getElementsByTagName(`img`)[0].src = getCardUrl(http.responseText);
-		}
-	}
+			tooltip[0].getElementsByTagName(`img`)[0].src = `https://storage.googleapis.com/ygoprodeck.com/pics_small/${card.id}.jpg`;
+			tooltip[1].innerHTML = card.desc;
+		})
+	
 }
 
 function getCardUrl(doc) {
